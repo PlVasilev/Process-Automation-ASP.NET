@@ -31,6 +31,7 @@ services:
             
     identity:
         container_name: identity
+        image: plvasilev/seller-identity-service
         build:
             context: ./Server/Seller.Server
             dockerfile: ./Seller.Identity/Dockerfile
@@ -49,6 +50,7 @@ services:
     
     listings:
         container_name: listings
+        image: plvasilev/seller-listings-service
         build:
             context: ./Server/Seller.Server
             dockerfile: ./Seller.Listings/Dockerfile
@@ -67,6 +69,7 @@ services:
             
     offers:
         container_name: offers
+        image: plvasilev/seller-offers-service
         build:
             context: ./Server/Seller.Server
             dockerfile: ./Seller.Offers/Dockerfile
@@ -85,6 +88,7 @@ services:
 
     contactus:
         container_name: contactus
+        image: plvasilev/seller-contactus-service
         build:
             context: ./Server/Seller.Server
             dockerfile: ./Seller.Messages/Dockerfile
@@ -103,6 +107,7 @@ services:
 
     notifications:
         container_name: notifications
+        image: plvasilev/seller-notifications-service
         build:
             context: ./Server/Seller.Server
             dockerfile: ./Seller.Notifications/Dockerfile
@@ -119,6 +124,7 @@ services:
 
     lisinggateway:
         container_name: lisinggateway
+        image: plvasilev/seller-gateway-service
         build:
             context: ./Server/Seller.Server
             dockerfile: ./Seller.Listing.Gateway/Dockerfile
@@ -135,6 +141,7 @@ services:
 
     administration:
         container_name: administration
+        image: plvasilev/seller-administration-service
         build:
             context: ./Server/Seller.Server
             dockerfile: ./Seller.Admin/Dockerfile
@@ -151,6 +158,7 @@ services:
 
     watchdog:
         container_name: watchdog
+        image: plvasilev/seller-watchdog-service
         build:
             context: ./Server/Seller.Server
             dockerfile: ./Seller.Watchdog/Dockerfile
@@ -167,6 +175,7 @@ services:
             
     angular:
         container_name: angular
+        image: plvasilev/seller-client-service
         build:
              context: ./Client/Seller.Client
              dockerfile: ./Dockerfile
