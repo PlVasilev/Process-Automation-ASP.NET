@@ -1,0 +1,32 @@
+.site-blocks-cover{
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    
+}
+
+.site-blocks-cover h1{
+    color: rgb(255, 251, 251);
+    font-size: 4rem;
+    padding-bottom: 2rem;
+    text-shadow: 0.2rem 0.2rem black;
+    
+}
+
+@media (max-width: 768px) {
+    .site-blocks-cover h1{
+        color: rgb(255, 251, 251);
+        font-size: 2rem;
+        padding-bottom: 1rem;
+        text-shadow: 0.1rem 0.1rem black;
+  }
+}
+
+.large-gutters {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-right: -35px;
+    margin-left: -35px; }
+    .large-gutters > [class*="col-"] {
+      padding-right: 35px;
+      padding-left: 35px; }

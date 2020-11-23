@@ -1,0 +1,20 @@
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4 bg-primary">
+
+    <!-- Footer Links -->
+    <div class="container-fluid">
+        <a *ngIf="token"  class="navbar-brand" routerLink="/listing/all">All Listings</a>
+        <a *ngIf="token"  class="navbar-brand" routerLink="/listing/add">Add Listing</a>
+        <a *ngIf="token"  class="navbar-brand" routerLink="/listing/mine">Mine Listings</a>
+        <a  *ngIf="token" class="navbar-brand" routerLink="/offer/mine">Mine Offers</a>
+        <a *ngIf="token" class="navbar-brand" routerLink="/deal/mine">Mine Deals</a>
+      
+    </div>
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->

@@ -1,0 +1,42 @@
+.property-details{
+    padding-top: 0rem;
+}
+p.your-offer{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0050a5;
+    
+}
+
+p{
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0050a5;
+}
+
+h3{
+    padding-top: 1.5rem;
+    color: #0050a5;
+}
+ img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto  
+}
+
+.site-section{
+    min-height: 82.3vh;
+}
+
+.site-section h1{
+    padding-top: 1em;
+   text-align: center;
+};
+
+a{
+    font-weight: 700;
+}
+
+.send-offer{
+    margin-top: 1rem;
+}

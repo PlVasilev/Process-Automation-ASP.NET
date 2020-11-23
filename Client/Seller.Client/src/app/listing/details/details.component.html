@@ -1,0 +1,88 @@
+<div *ngIf="!selectedListing" class="site-section" id="property-details">
+    <h1>LOADING...</h1>
+</div>
+
+<div *ngIf="selectedListing" class="site-section" id="property-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 pl-lg-5 ml-auto">
+                <h3 class="text-black mb-4">{{selectedListing.title}}</h3>
+            </div>
+            <div class="col-lg-6">
+                <div class="owl-carousel slide-one-item with-dots">
+                    <div><img src={{selectedListing.imageUrl}} alt="Image" class="img-fluid"></div>
+                </div>
+            </div>
+            <div class="col-lg-6 pl-lg-5 ml-auto">
+                <div class="mb-5 property-details">
+                    <p>Price: $ {{selectedListing.price}}</p>
+                    <p>Offers: {{offersCount}}</p>
+                    <p>Posted on: {{selectedListing.created}}</p>
+                    <p>Posted by: {{selectedListing.sellerName}}</p>
+                    <p>Description: {{selectedListing.description}}</p>
+                    <p class="your-offer">Your Offered Price: $ {{offerSize}}</p>
+                </div>
+            </div>
+  
+            <div class="col-lg-12">
+                <p>
+                    <button *ngIf="token && userId != selectedListing.sellerId" type="button"
+                        class="btn btn-primary send-offer" data-toggle="modal" data-target="#exampleModal"
+                        data-whatever="@mdo">AddOffer</button>
+                 
+                </p>
+                <p><a *ngIf="token && userId == selectedListing.sellerId"
+                    routerLink="offer/all" class="btn btn-primary">See All Offers</a> </p>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form #addOfferForm="ngForm" (ngSubmit)="addOffertHandler(addOfferForm.value)">
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Set oyur price</label>
+                                        <input #priceInput="ngModel" ngModel name="price" class="form-control"
+                                            placeholder="Price" type="number" required pattern="^[1-9]+\.?[0-9]*$"
+                                            [class.is-valid]="!priceInput.errors && priceInput.touched"
+                                            [class.is-invalid]="priceInput.errors && priceInput.touched">
+                                        <div *ngIf="priceInput.errors && priceInput.touched" class="invalid-feedback">
+                                            You must enter Price of 1 or greater than 1</div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button [disabled]="addOfferForm.invalid" type="submit" class="btn btn-primary"> Add
+                                            Offer
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+
+                <p> <a *ngIf="token && userId == selectedListing.sellerId"
+                        routerLink="/listing/edit/{{selectedListing.id}}" class="btn btn-warning active">Edit</a></p>
+                <p> <a *ngIf="token && userId == selectedListing.sellerId" (click)="deleteHandler(selectedListing.id)"
+                        class="btn btn-danger active">Delete</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+    })
+</script>

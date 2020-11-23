@@ -1,0 +1,68 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <h1>Edit Listing</h1>
+                <form #editListingForm="ngForm" (ngSubmit)="updateListingHandler(editListingForm.value)">
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        <input #titleInput="ngModel" [ngModel]="selectedListing?.title" name="title" class="form-control"
+                            placeholder="Title" [class.is-valid]="!titleInput.errors && titleInput.touched"
+                            [class.is-invalid]="titleInput.errors && titleInput.touched" required
+                            pattern="^[\w\s,.`':;()&]{3,}$">
+                        <div *ngIf="titleInput.errors && titleInput.touched" class="invalid-feedback">Input must be
+                            least 3
+                            characters log.</div>
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        <input #imageUrlInput="ngModel" [ngModel]="selectedListing?.imageUrl" name="imageUrl"
+                            class="form-control" placeholder="Image URL"
+                            [class.is-valid]="!imageUrlInput.errors && imageUrlInput.touched"
+                            [class.is-invalid]="imageUrlInput.errors && imageUrlInput.touched" required>
+                        <div *ngIf="imageUrlInput.errors && imageUrlInput.touched" class="invalid-feedback">Input must
+                            be least 3
+                            characters log.</div>
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                        </div>
+                        <input #priceInput="ngModel" [ngModel]="selectedListing?.price" name="price" class="form-control"
+                            placeholder="Price" type="number" required pattern="^[1-9]*\.?[0-9]+$"
+                            [class.is-valid]="!priceInput.errors && priceInput.touched"
+                            [class.is-invalid]="priceInput.errors && priceInput.touched">
+                        <div *ngIf="priceInput.errors && priceInput.touched" class="invalid-feedback">You must enter
+                            Price of 1 or greater than 1</div>
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        <textarea #descriptionInput="ngModel" [ngModel]="selectedListing?.description" name="description"
+                            class="form-control" rows="8" placeholder="Description"
+                            [class.is-valid]="!descriptionInput.errors && descriptionInput.touched"
+                            [class.is-invalid]="descriptionInput.errors && descriptionInput.touched" required
+                            pattern="^[\w\s,.`':;()&]{3,}$"></textarea>
+                        <div *ngIf="descriptionInput.errors && descriptionInput.touched" class="invalid-feedback">Input
+                            must be least 3
+                            characters log.</div>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="editListingForm.invalid" type="submit" class="btn btn-primary btn-block">
+                            Edit Item
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+</div>
+
+<!-- {{addListingForm.value | json}} -->

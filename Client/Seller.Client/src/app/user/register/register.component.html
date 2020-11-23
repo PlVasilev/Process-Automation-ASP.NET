@@ -1,0 +1,107 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <h1>Registration Form</h1>
+                <form #registerFrom="ngForm" (ngSubmit)="registerHandler(registerFrom.value)">
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        <input #usernameInput="ngModel" ngModel name="username" class="form-control"
+                            placeholder="Username" [class.is-valid]="!usernameInput.errors && usernameInput.touched"
+                            [class.is-invalid]="usernameInput.errors && usernameInput.touched" required
+                            pattern="\w{3,}">
+                        <div *ngIf="usernameInput.errors && usernameInput.touched" class="invalid-feedback">Input must
+                            be least 3
+                            characters log.</div>
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        <input #firstNameInput="ngModel" ngModel name="firstName" class="form-control"
+                            placeholder="First Name" [class.is-valid]="!firstNameInput.errors && firstNameInput.touched"
+                            [class.is-invalid]="firstNameInput.errors && firstNameInput.touched" required
+                            pattern="\w{3,}">
+                        <div *ngIf="firstNameInput.errors && firstNameInput.touched" class="invalid-feedback">Input must
+                            be least 3
+                            characters log.</div>
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        <input #lastNameInput="ngModel" ngModel name="lastname" class="form-control"
+                            placeholder="Last Name" [class.is-valid]="!lastNameInput.errors && lastNameInput.touched"
+                            [class.is-invalid]="lastNameInput.errors && lastNameInput.touched" required
+                            pattern="\w{3,}">
+                        <div *ngIf="lastNameInput.errors && lastNameInput.touched" class="invalid-feedback">Input must
+                            be least 3
+                            characters log.</div>
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                        </div>
+                        <input #emailInput="ngModel" ngModel name="email" class="form-control"
+                            placeholder="Email Address" type="email"
+                            [class.is-valid]="!emailInput.errors && emailInput.touched"
+                            [class.is-invalid]="emailInput.errors && emailInput.touched" required email>
+                        <div *ngIf="emailInput.errors && emailInput.touched" class="invalid-feedback">You must enter
+                            valid Email</div>
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                        </div>
+                        <input #phoneNumberInput="ngModel" ngModel name="phoneNumber" class="form-control"
+                            placeholder="Phone number" [class.is-valid]="!phoneNumberInput.errors && phoneNumberInput.touched"
+                            [class.is-invalid]="phoneNumberInput.errors && phoneNumberInput.touched" required pattern="\d{3,}"
+                            type="text">
+                        <div *ngIf="phoneNumberInput.errors && phoneNumberInput.touched" class="invalid-feedback">Input must
+                            be least 3 digits log.</div>
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input #passwordInput="ngModel" ngModel name="password" class="form-control"
+                            placeholder="Create password" type="password"
+                            [class.is-valid]="!passwordInput.errors && passwordInput.touched"
+                            [class.is-invalid]="passwordInput.errors && passwordInput.touched" required
+                            pattern="\w{3,}">
+                        <div *ngIf="passwordInput.errors && passwordInput.touched" class="invalid-feedback">Input must
+                            be least 3
+                            characters log.</div>
+                    </div>
+                    <div *ngIf="passwordInput.value != repeatPasswordInput.value" class="password-match">Password dont
+                        match
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input #repeatPasswordInput="ngModel" ngModel name="repeatPassword" class="form-control"
+                            placeholder="Repeat password" type="password"
+                            [class.is-valid]="!repeatPasswordInput.errors && repeatPasswordInput.touched"
+                            [class.is-invalid]="repeatPasswordInput.errors && repeatPasswordInput.touched" required
+                            pattern="\w{3,}">
+                        <div *ngIf="repeatPasswordInput.errors && repeatPasswordInput.touched" class="invalid-feedback">
+                            Input must be
+                            least 3 characters log.</div>
+
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="registerFrom.invalid || passwordInput.value != repeatPasswordInput.value "
+                            type="submit" class="btn btn-primary btn-block"> Create Account
+                        </button>
+                    </div>
+                    <p class="text-center">Have an account? <a routerLink="/user/login">Log In</a> </p>
+                </form>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+</div>

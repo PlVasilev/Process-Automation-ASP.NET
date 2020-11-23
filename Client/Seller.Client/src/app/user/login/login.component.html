@@ -1,0 +1,43 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <h1>Log in Form</h1>
+                <form #loginFrom="ngForm" (ngSubmit)="loginHandler(loginFrom.value)">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="username">Username</label>
+                            <input #usernameInput="ngModel" ngModel name="username" id="username" class="form-control"
+                                [class.is-valid]="!usernameInput.errors && usernameInput.touched"
+                                [class.is-invalid]="usernameInput.errors && usernameInput.touched"
+                                placeholder="Username" required pattern="\w{3,}">
+                            <div *ngIf="usernameInput.errors && usernameInput.touched" class="invalid-feedback">Username
+                                must be
+                                at least 3 character long</div>
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="password">Password</label>
+                            <input #passwordInput="ngModel" ngModel name="password" id="password" class="form-control"
+                                placeholder="Password" [class.is-valid]="!passwordInput.errors && passwordInput.touched"
+                                [class.is-invalid]="passwordInput.errors && passwordInput.touched" type="password"
+                                required minlength="3">
+                            <!-- <div *ngIf="!passwordInput.errors && passwordInput.touched" class="valid-feedback">Success! You've
+                done it.</div> -->
+                            <div *ngIf="passwordInput.errors && passwordInput.touched" class="invalid-feedback">Password
+                                must be
+                                at least 3 character long</div>
+                        </div>
+                    </div>
+                    <button [disabled]="loginFrom.invalid" type="submit" class="btn btn-primary"> Log In
+                    </button>
+                </form>
+                <p class="text-center">You do Not nave an account? <a routerLink="/user/register">Register</a> </p>
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+</div>

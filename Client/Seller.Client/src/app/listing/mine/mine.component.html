@@ -1,0 +1,35 @@
+<div class="form-container">
+    <form #searchForm="ngForm" (ngSubmit)="searchFormHandler(searchForm.value)" class="form-inline my-2 my-lg-0">
+    
+        <input #searchInput="ngModel" ngModel name="search" class="form-control mr-sm-2" type="text" placeholder="Search"
+            [class.is-valid]="!searchInput.errors && searchInput.touched"
+            [class.is-invalid]="searchInput.errors && searchInput.touched" required>
+        <button class="btn btn-secondary my-2 my-sm-0">Search</button>
+    </form>
+    </div>
+    <div *ngIf="searchInput.errors && searchInput.touched" class="invalid-feedback">You must have search input !</div>
+    
+    <div *ngIf="allListings.length == 0" class="listing-sections" id="properties-section">
+        <h1>YOU HAVE NO ITEMS FOR SALE </h1>
+    </div>
+    <div *ngIf="allListings.length > 0" class="listing-sections" id="properties-section">
+    
+        <div class="container">
+            <div class="search-text-error" *ngIf="!allListings">There are no objects with your search input !</div>
+            <div class="row large-gutters" *ngIf="allListings">
+    
+                <div class="col-md-6 col-lg-4 mb-5 mb-lg-5 " *ngFor="let listing of allListings">
+                    <div class="ftco-media-1">
+                        <div class="ftco-media-1-inner">
+                            <a [id]="listing.id" (click)="detailsIdHandler(listing.id)" class="d-inline-block mb-4">
+                                <img src={{listing.imageUrl}} alt="FImageo" class="img-fluid"></a>
+                            <div class="ftco-media-details">
+                                <h5>{{listing.title}}</h5>
+                                <strong>${{listing.price}}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

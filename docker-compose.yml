@@ -1,0 +1,188 @@
+version: "3.8"
+
+services:
+
+    data:
+        container_name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+            - "1433:1433"
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=yourStrongPassword12!@
+        volumes:
+            - sqldata:/var/opt/mssql 
+        networks:
+            - seller-network
+    
+    messages:
+        container_name: rabbitmq
+        image: rabbitmq:3-management
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+        hostname: "rabbitmq"
+        environment:
+            - RABBITMQ_ERLANG_COOKIE=Rand0mR4bbitMqCo0k1e
+            - RABBITMQ_DEFAULT_USER=rabbitmq
+            - RABBITMQ_DEFAULT_PASS=rabbitmq
+        networks: 
+            - seller-network
+            
+    identity:
+        container_name: identity
+        build:
+            context: ./Server/Seller.Server
+            dockerfile: ./Seller.Identity/Dockerfile
+        ports: 
+            - "5003:80"
+        env_file: Server/Seller.Server/Seller.Shared/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerIdentityDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/identity/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - seller-network
+        depends_on:
+            - data
+    
+    listings:
+        container_name: listings
+        build:
+            context: ./Server/Seller.Server
+            dockerfile: ./Seller.Listings/Dockerfile
+        ports: 
+            - "5001:80"
+        env_file: Server/Seller.Server/Seller.Shared/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerListingsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/listings/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - seller-network
+        depends_on:
+            - data
+            
+    offers:
+        container_name: offers
+        build:
+            context: ./Server/Seller.Server
+            dockerfile: ./Seller.Offers/Dockerfile
+        ports: 
+            - "5005:80"
+        env_file: Server/Seller.Server/Seller.Shared/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerOffersDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/offers/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - seller-network
+        depends_on:
+            - data 
+
+    contactus:
+        container_name: contactus
+        build:
+            context: ./Server/Seller.Server
+            dockerfile: ./Seller.Messages/Dockerfile
+        ports: 
+            - "5007:80"
+        env_file: Server/Seller.Server/Seller.Shared/Common.env
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerMessagesDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
+        restart: on-failure
+        volumes:
+            - ./.aspnet/contactus/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - seller-network
+        depends_on:
+            - data 
+
+    notifications:
+        container_name: notifications
+        build:
+            context: ./Server/Seller.Server
+            dockerfile: ./Seller.Notifications/Dockerfile
+        ports: 
+            - "5011:80"
+        env_file: Server/Seller.Server/Seller.Shared/Common.env
+        restart: on-failure
+        volumes:
+            - ./.aspnet/notifications/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - seller-network
+        depends_on:
+            - data   
+
+    lisinggateway:
+        container_name: lisinggateway
+        build:
+            context: ./Server/Seller.Server
+            dockerfile: ./Seller.Listing.Gateway/Dockerfile
+        ports: 
+            - "5009:80"
+        env_file: Server/Seller.Server/Seller.Shared/Common.env
+        restart: on-failure
+        volumes:
+            - ./.aspnet/lisinggateway/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - seller-network
+        depends_on:
+            - data 
+
+    administration:
+        container_name: administration
+        build:
+            context: ./Server/Seller.Server
+            dockerfile: ./Seller.Admin/Dockerfile
+        ports: 
+            - "5013:80"
+        env_file: Server/Seller.Server/Seller.Shared/Common.env
+        restart: on-failure
+        volumes:
+            - ./.aspnet/administration/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - seller-network
+        depends_on:
+            - data    
+
+    watchdog:
+        container_name: watchdog
+        build:
+            context: ./Server/Seller.Server
+            dockerfile: ./Seller.Watchdog/Dockerfile
+        ports: 
+            - "5015:80"
+        env_file: Server/Seller.Server/Seller.Shared/Common.env
+        restart: on-failure
+        volumes:
+            - ./.aspnet/watchdog/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+        networks: 
+            - seller-network
+        depends_on:
+            - data
+            
+    angular:
+        container_name: angular
+        build:
+             context: ./Client/Seller.Client
+             dockerfile: ./Dockerfile
+        ports:
+            - "4201:4200"
+        volumes:
+            - ".:/angular"
+            - "/angular/Client/Seller.Client/node_modules" 
+            - ./.aspnet/angular/DataProtection-Keys:/root/.aspnet/DataProtection-Keys            
+        networks: 
+            - seller-network
+        depends_on:
+            - data
+            
+networks:
+    seller-network:
+    
+volumes:
+    sqldata:

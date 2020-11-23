@@ -1,0 +1,24 @@
+<div class="jumbotron">
+      <h1 *ngIf="allOffers && allOffers.length == 0" >YOU HAVE NO OFFERS YET</h1>
+      <h1 *ngIf="allOffers && allOffers.length> 0">Offers for {{lisitngTitile}} from {{sellerName}}</h1>
+    <table *ngIf="allOffers && allOffers.length > 0"  class="table table-striped">
+      <thead>
+      <tr>  
+        <th  style="width: 15.00%">Price</th>
+        <th  style="width: 20.00%">Send On</th>
+        <th  style="width: 30.00%">Listing Title</th>
+        <th  style="width: 25.00%">Send By</th>
+        <th  style="width: 10.00%">Accept</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let offer of allOffers">
+        <td>{{offer.price | currency :'USD':'symbol':'1.2-2'}}</td>
+        <td>{{offer.created}}</td>
+        <td>{{offer.title}}</td>
+        <td>{{offer.buyerName}}</td>
+        <td><button class="btn btn-success" (click)="acceptOffer(offer.id, offer.listingId, offer.creatorId, offer.price, offer.title)">Accept</button></td>
+      </tr>
+      </tbody>
+    </table>
+    </div>

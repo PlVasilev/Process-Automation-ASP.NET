@@ -1,0 +1,70 @@
+<div class="jumbotron">
+    <section id="contact-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12 text-center">
+                    <h2 class="section-title mb-3">Contct Us</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 mb-5">
+                    <form #addMessageForm="ngForm" (ngSubmit)="addMessageHandler(addMessageForm.value)"
+                        class="p-5 bg-white">
+
+                        <h2 class="h4 text-black mb-5">Get In Touch</h2>
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label class="text-black" for="subject">Subject</label>
+                                <input #titleInput="ngModel" ngModel name="title" id="title" class="form-control"
+                                    placeholder="Title" [class.is-valid]="!titleInput.errors && titleInput.touched"
+                                    [class.is-invalid]="titleInput.errors && titleInput.touched" required
+                                    pattern="^[\w\s,.`':;()&]{3,}$">
+                                <div *ngIf="titleInput.errors && titleInput.touched" class="invalid-feedback">Input must
+                                    be least 3
+                                    characters log.</div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label class="text-black" for="message">Message</label>
+                                <textarea #contentInput="ngModel" ngModel name="content" id="content" cols="30" rows="7"
+                                    class="form-control" placeholder="Write your notes or questions here..."
+                                    [class.is-valid]="!contentInput.errors && contentInput.touched"
+                                    [class.is-invalid]="contentInput.errors && contentInput.touched" required
+                                    pattern="^[\w\s,.`':;()&]{3,}$">
+                                    <div *ngIf="contentInput.errors && contentInput.touched" class="invalid-feedback">Input must be least 3
+                                     characters log.</div>
+                                </textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button [disabled]="addMessageForm.invalid" type="submit" class="btn btn-primary btn-block">
+                                Send Message
+                            </button>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="col-md-5">
+
+                    <div class="p-4 mb-3 bg-white">
+                        <p class="mb-0 font-weight-bold">Address</p>
+                        <p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
+
+                        <p class="mb-0 font-weight-bold">Phone</p>
+                        <p class="mb-4"><a href="#">+1 232 3235 324</a></p>
+
+                        <p class="mb-0 font-weight-bold">Email Address</p>
+                        <p class="mb-0"><a href="#">youremail@domain.com</a></p>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

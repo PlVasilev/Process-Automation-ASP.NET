@@ -1,0 +1,11 @@
+.password-match{
+    color: red;
+    margin-bottom: 1em;
+    font-size: 0.8em;
+}
+
+.jumbotron{
+    min-height: 84.8vh;
+    margin-bottom: 0;
+    background-color: white;
+}
