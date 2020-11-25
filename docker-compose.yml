@@ -26,6 +26,8 @@ services:
             - RABBITMQ_ERLANG_COOKIE=Rand0mR4bbitMqCo0k1e
             - RABBITMQ_DEFAULT_USER=rabbitmq
             - RABBITMQ_DEFAULT_PASS=rabbitmq
+        volumes:
+            - rabbitmq:/var/lib/rabbitmq/mnesia
         networks: 
             - seller-network
             
@@ -42,7 +44,7 @@ services:
             - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerIdentityDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
         restart: on-failure
         volumes:
-            - ./.aspnet/identity/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+            - data-protection:/root/.aspnet/DataProtection-Keys
         networks: 
             - seller-network
         depends_on:
@@ -61,7 +63,7 @@ services:
             - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerListingsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
         restart: on-failure
         volumes:
-            - ./.aspnet/listings/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+            - data-protection:/root/.aspnet/DataProtection-Keys
         networks: 
             - seller-network
         depends_on:
@@ -80,7 +82,7 @@ services:
             - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerOffersDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
         restart: on-failure
         volumes:
-            - ./.aspnet/offers/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+            - data-protection:/root/.aspnet/DataProtection-Keys
         networks: 
             - seller-network
         depends_on:
@@ -99,7 +101,7 @@ services:
             - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerMessagesDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
         restart: on-failure
         volumes:
-            - ./.aspnet/contactus/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+            - data-protection:/root/.aspnet/DataProtection-Keys
         networks: 
             - seller-network
         depends_on:
@@ -116,7 +118,7 @@ services:
         env_file: Server/Seller.Server/Seller.Shared/Common.env
         restart: on-failure
         volumes:
-            - ./.aspnet/notifications/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+            - data-protection:/root/.aspnet/DataProtection-Keys
         networks: 
             - seller-network
         depends_on:
@@ -133,7 +135,7 @@ services:
         env_file: Server/Seller.Server/Seller.Shared/Common.env
         restart: on-failure
         volumes:
-            - ./.aspnet/lisinggateway/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+            - data-protection:/root/.aspnet/DataProtection-Keys
         networks: 
             - seller-network
         depends_on:
@@ -150,7 +152,7 @@ services:
         env_file: Server/Seller.Server/Seller.Shared/Common.env
         restart: on-failure
         volumes:
-            - ./.aspnet/administration/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+            - data-protection:/root/.aspnet/DataProtection-Keys
         networks: 
             - seller-network
         depends_on:
@@ -167,7 +169,7 @@ services:
         env_file: Server/Seller.Server/Seller.Shared/Common.env
         restart: on-failure
         volumes:
-            - ./.aspnet/watchdog/DataProtection-Keys:/root/.aspnet/DataProtection-Keys
+            - data-protection:/root/.aspnet/DataProtection-Keys
         networks: 
             - seller-network
         depends_on:
@@ -184,7 +186,7 @@ services:
         volumes:
             - ".:/angular"
             - "/angular/Client/Seller.Client/node_modules" 
-            - ./.aspnet/angular/DataProtection-Keys:/root/.aspnet/DataProtection-Keys            
+            - data-protection:/root/.aspnet/DataProtection-Keys            
         networks: 
             - seller-network
         depends_on:
@@ -195,3 +197,5 @@ networks:
     
 volumes:
     sqldata:
+    rabbitmq:
+    data-protection:
