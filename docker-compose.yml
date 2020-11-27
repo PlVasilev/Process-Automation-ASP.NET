@@ -182,16 +182,11 @@ services:
              context: ./Client/Seller.Client
              dockerfile: ./Dockerfile
         ports:
-            - "4201:4200"
-        volumes:
-            - ".:/angular"
-            - "/angular/Client/Seller.Client/node_modules" 
-            - data-protection:/root/.aspnet/DataProtection-Keys            
+            - "4201:4200"          
+        restart: on-failure 
         networks: 
-            - seller-network
-        depends_on:
-            - data
-            
+            - seller-network        
+        
 networks:
     seller-network:
     
