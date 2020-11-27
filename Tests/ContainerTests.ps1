@@ -8,7 +8,7 @@ do {
     if ($testStart.statuscode -eq '200') {
         $started = $true
     } else {
-        Start-Sleep -Seconds 60/$count
+        Start-Sleep -Seconds 40
     }
     
 } until ($started -or ($count -eq 3))

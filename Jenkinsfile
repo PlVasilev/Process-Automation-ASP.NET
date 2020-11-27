@@ -40,6 +40,14 @@ pipeline {
       steps {
         powershell(script: './Tests/ContainerTests.ps1') 
       }
+	  post {
+	    success {
+	      echo "Run Integration successfull!"
+	    }
+	    failure {
+	      powershell(script: 'docker-compose down')
+	    }
+      }
     }
     stage('Stop Test Application') {
       steps {
