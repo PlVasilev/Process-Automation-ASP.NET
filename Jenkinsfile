@@ -62,5 +62,57 @@ pipeline {
 	    }
       }
     }
+	stage('Push Images') {
+      when { branch 'main' }
+      steps {
+        script {
+          docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+            def image = docker.image("plvasilev/seller-identity-service")
+            image.push("1.0.${env.BUILD_ID}")
+            image.push('latest')
+			}
+          docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+            def image = docker.image("plvasilev/seller-listings-service")
+            image.push("1.0.${env.BUILD_ID}")
+            image.push('latest')
+			}
+          docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+            def image = docker.image("plvasilev/seller-offers-service")
+            image.push("1.0.${env.BUILD_ID}")
+            image.push('latest')
+			}
+          docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+            def image = docker.image("plvasilev/seller-contactus-service")
+            image.push("1.0.${env.BUILD_ID}")
+            image.push('latest')
+			}
+          docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+            def image = docker.image("plvasilev/seller-notifications-service")
+            image.push("1.0.${env.BUILD_ID}")
+            image.push('latest')
+			}
+          docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+            def image = docker.image("plvasilev/seller-gateway-service")
+            image.push("1.0.${env.BUILD_ID}")
+            image.push('latest')
+			}
+          docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+            def image = docker.image("plvasilev/seller-administration-service")
+            image.push("1.0.${env.BUILD_ID}")
+            image.push('latest')
+			}
+          docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+            def image = docker.image("plvasilev/seller-watchdog-service")
+            image.push("1.0.${env.BUILD_ID}")
+            image.push('latest')
+			}
+          docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+            def image = docker.image("plvasilev/seller-client-service")
+            image.push("1.0.${env.BUILD_ID}")
+            image.push('latest')			
+          }
+        }
+      }
+    }
   }
 }
