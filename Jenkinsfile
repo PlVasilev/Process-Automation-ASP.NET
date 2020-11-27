@@ -36,6 +36,11 @@ pipeline {
 	    }
       }
     }
+	stage('Run Integration Tests') {
+      steps {
+        powershell(script: './Tests/ContainerTests.ps1') 
+      }
+    }
     stage('Stop Test Application') {
       steps {
         powershell(script: 'docker-compose down')  		
