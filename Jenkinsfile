@@ -25,7 +25,7 @@ pipeline {
     }
     stage('Run Test Application') {
       steps {
-        powershell(script: 'docker-compose up -d -Verb RunAs')		
+        powershell(script: 'docker-compose up -d')	
       }
 	  post {
 	    success {
