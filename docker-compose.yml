@@ -11,7 +11,7 @@ services:
             - ACCEPT_EULA=Y
             - SA_PASSWORD=yourStrongPassword12!@
         volumes:
-            - sqldata:/var/opt/mssql/data
+            - sqldata:/var/opt/mssql
         networks:
             - seller-network
     
