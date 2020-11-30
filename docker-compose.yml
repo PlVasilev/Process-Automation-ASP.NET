@@ -150,6 +150,9 @@ services:
         ports: 
             - "5013:80"
         env_file: Server/Seller.Server/Seller.Shared/Common.env
+        environment:
+            - ServiceEndpoints__Identity=http://identity
+            - ServiceEndpoints__Message=http://contactus
         restart: on-failure
         volumes:
             - data-protection:/root/.aspnet/DataProtection-Keys
@@ -167,6 +170,13 @@ services:
         ports: 
             - "5015:80"
         env_file: Server/Seller.Server/Seller.Shared/Common.env
+        environment:
+            - HealthChecks-UI__HealthChecks__0__Name=Listings
+            - HealthChecks-UI__HealthChecks__0__Uri=http://Listings/health
+            - HealthChecks-UI__HealthChecks__1__Name=Identity
+            - HealthChecks-UI__HealthChecks__1__Uri=http://Identity/health
+            - HealthChecks-UI__HealthChecks__2__Name=Offers
+            - HealthChecks-UI__HealthChecks__2__Uri=http://Offers/health
         restart: on-failure
         volumes:
             - data-protection:/root/.aspnet/DataProtection-Keys

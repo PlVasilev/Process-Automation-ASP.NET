@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: environment-settings
+data:
+  event-bus-host: event-bus
+  event-bus-user: rabbitmquser
+  event-bus-cookie: Rand0mR4bbitMqCo0k1e
+  notifications-allowed-origins: http://localhost
+  administration-identity-endpoint: http://identity-service:5003
+  administration-contactus-endpoint: http://contactus-service:5007
+  watchdog-identity-health: http://identity-service:5003/health
+  watchdog-listings-health: http://listings-service:5001/health
+  watchdog-offers-health: http://offers-service:5005/health
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: environment-secrets
+data:
+  identity-database-sa-password: eW91clN0cm9uZ1Bhc3N3b3JkMTIhQA==
+  listings-database-sa-password: eW91clN0cm9uZ1Bhc3N3b3JkMTIhQA==
+  offers-database-sa-password: eW91clN0cm9uZ1Bhc3N3b3JkMTIhQA==
+  contactus-database-sa-password: eW91clN0cm9uZ1Bhc3N3b3JkMTIhQA==
+  security-token-secret: QXZlbmdlcnMgQXNzZW1ibGU=
+  identity-service-connection-string: U2VydmVyPXNxbHNlcnZlcjtEYXRhYmFzZT1TZWxsZXJJZGVudGl0eURhdGFiYXNlO1VzZXIgSWQ9c2E7IFBhc3N3b3JkPXlvdXJTdHJvbmdQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
+  listings-service-connection-string: U2VydmVyPXNxbHNlcnZlcjtEYXRhYmFzZT1TZWxsZXJMaXN0aW5nc0RhdGFiYXNlO1VzZXIgSWQ9c2E7IFBhc3N3b3JkPXlvdXJTdHJvbmdQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
+  offers-service-connection-string: U2VydmVyPXNxbHNlcnZlcjtEYXRhYmFzZT1TZWxsZXJPZmZlcnNEYXRhYmFzZTtVc2VyIElkPXNhOyBQYXNzd29yZD15b3VyU3Ryb25nUGFzc3dvcmQxMiFAO011bHRpcGxlQWN0aXZlUmVzdWx0U2V0cz10cnVl
+  contactus-service-connection-string: U2VydmVyPXNxbHNlcnZlcjtEYXRhYmFzZT1TZWxsZXJNZXNzYWdlc0RhdGFiYXNlO1VzZXIgSWQ9c2E7IFBhc3N3b3JkPXlvdXJTdHJvbmdQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
+  event-bus-password: cmFiYml0bXE=
