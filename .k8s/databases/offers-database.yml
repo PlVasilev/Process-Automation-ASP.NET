@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: offers-database-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: offers-database
+spec:
+  clusterIP: None
+  ports:
+  - port: 1433
+    targetPort: 1433
+  selector:
+    database: offers
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: offers-database
+spec:
+  serviceName: offers-database
+  selector:
+    matchLabels: 
+      database: offers
+  template:
+    metadata:
+      labels:
+        database: offers
+        system: database
+    spec:
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        fsGroup: 10001
+      containers:
+      - name: offers-database
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 1433
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "500m"
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: environment-secrets
+              key: offers-database-sa-password
+        volumeMounts:
+        - name: offers-database-data
+          mountPath: /var/opt/mssql
+      volumes:
+      - name: offers-database-data
+        persistentVolumeClaim:
+          claimName: offers-database-data
+    

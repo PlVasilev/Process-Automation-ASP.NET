@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: lisinggateway-service-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  - ReadOnlyMany 
+  resources:
+    requests:
+      storage: 10Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: lisinggateway-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5009
+    targetPort: 80
+  selector:
+    web-service: lisinggateway
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lisinggateway-service
+spec:
+  selector:
+    matchLabels:
+      web-service: lisinggateway
+  template:
+    metadata:
+      labels:
+        web-service: lisinggateway
+        system: server
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                web-service: lisinggateway
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: lisinggateway-service
+        image: plvasilev/seller-gateway-service:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: AppSettings__Secret
+          valueFrom:
+            secretKeyRef:
+              name: environment-secrets
+              key: security-token-secret
+        volumeMounts:
+        - name: lisinggateway-service-data
+          mountPath: /root/.aspnet/DataProtection-Keys
+      volumes:
+      - name: lisinggateway-service-data
+        persistentVolumeClaim:
+          claimName: lisinggateway-service-data

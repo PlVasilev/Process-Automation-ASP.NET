@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: contactus-database-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: contactus-database
+spec:
+  clusterIP: None
+  ports:
+  - port: 1433
+    targetPort: 1433
+  selector:
+    database: contactus
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: contactus-database
+spec:
+  serviceName: contactus-database
+  selector:
+    matchLabels: 
+      database: contactus
+  template:
+    metadata:
+      labels:
+        database: contactus
+        system: database
+    spec:
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        fsGroup: 10001
+      containers:
+      - name: contactus-database
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 1433
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "500m"
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: environment-secrets
+              key: contactus-database-sa-password
+        volumeMounts:
+        - name: contactus-database-data
+          mountPath: /var/opt/mssql
+      volumes:
+      - name: contactus-database-data
+        persistentVolumeClaim:
+          claimName: contactus-database-data
+    

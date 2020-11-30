@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: contactus-service-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  - ReadOnlyMany 
+  resources:
+    requests:
+      storage: 10Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: contactus-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5007
+    targetPort: 80
+  selector:
+    web-service: contactus
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contactus-service
+spec:
+  selector:
+    matchLabels:
+      web-service: contactus
+  template:
+    metadata:
+      labels:
+        web-service: contactus
+        system: server
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                web-service: contactus
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: contactus-service
+        image: plvasilev/seller-contactus-service:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        env:
+        - name: AppSettings__Secret
+          valueFrom:
+            secretKeyRef:
+              name: environment-secrets
+              key: security-token-secret
+        - name: ConnectionStrings__DefaultConnection
+          valueFrom:
+            secretKeyRef:
+              name: environment-secrets
+              key: contactus-service-connection-string
+        volumeMounts:
+        - name: contactus-service-data
+          mountPath: /root/.aspnet/DataProtection-Keys
+      volumes:
+      - name: contactus-service-data
+        persistentVolumeClaim:
+          claimName: contactus-service-data

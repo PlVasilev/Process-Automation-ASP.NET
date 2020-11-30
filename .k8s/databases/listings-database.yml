@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: listings-database-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: listings-database
+spec:
+  clusterIP: None
+  ports:
+  - port: 1433
+    targetPort: 1433
+  selector:
+    database: listings
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: listings-database
+spec:
+  serviceName: listings-database
+  selector:
+    matchLabels: 
+      database: listings
+  template:
+    metadata:
+      labels:
+        database: listings
+        system: database
+    spec:
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        fsGroup: 10001
+      containers:
+      - name: listings-database
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 1433
+        resources:
+          limits:
+            memory: "2Gi"
+            cpu: "500m"
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: environment-secrets
+              key: listings-database-sa-password
+        volumeMounts:
+        - name: listings-database-data
+          mountPath: /var/opt/mssql
+      volumes:
+      - name: listings-database-data
+        persistentVolumeClaim:
+          claimName: listings-database-data
+    
