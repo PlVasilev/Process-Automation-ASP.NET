@@ -11,8 +11,8 @@ data:
   administration-contactus-endpoint: http://contactus-service:5007
   geteway-listings-endpoint: http://listings-service:5001
   geteway-offers-endpoint: http://offers-service:5005
-  watchdog-identity-health: http://identity-service:5003/health
   watchdog-listings-health: http://listings-service:5001/health
+  watchdog-identity-health: http://identity-service:5003/health
   watchdog-offers-health: http://offers-service:5005/health
 
 ---
@@ -31,4 +31,4 @@ data:
   listings-service-connection-string: U2VydmVyPWxpc3RpbmdzLWRhdGFiYXNlO0RhdGFiYXNlPVNlbGxlckxpc3RpbmdzRGF0YWJhc2U7VXNlciBJZD1zYTsgUGFzc3dvcmQ9bGlzdGluZ3NQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
   offers-service-connection-string: U2VydmVyPW9mZmVycy1kYXRhYmFzZTtEYXRhYmFzZT1TZWxsZXJPZmZlcnNEYXRhYmFzZTtVc2VyIElkPXNhOyBQYXNzd29yZD1vZmZlcnNQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
   contactus-service-connection-string: U2VydmVyPWNvbnRhY3R1cy1kYXRhYmFzZTtEYXRhYmFzZT1TZWxsZXJNZXNzYWdlc0RhdGFiYXNlO1VzZXIgSWQ9c2E7IFBhc3N3b3JkPWNvbnRhY3R1c1Bhc3N3b3JkMTIhQDtNdWx0aXBsZUFjdGl2ZVJlc3VsdFNldHM9dHJ1ZQ==
-  event-bus-password: cmFiYml0bXFQYXNzd29yZDEyIQ==
+  event-bus-password: cmFiYml0bXE=

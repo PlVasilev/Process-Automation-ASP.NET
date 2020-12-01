@@ -55,7 +55,7 @@ spec:
         - containerPort: 80
         resources:
           limits:
-            memory: "256Mi"
+            memory: "512Mi"
             cpu: "250m"
         env:
         - name: AppSettings__Secret
@@ -68,21 +68,6 @@ spec:
             secretKeyRef:
               name: environment-secrets
               key: offers-service-connection-string
-        - name: MessageQueueSettings__Host
-          valueFrom:
-            configMapKeyRef:
-              name: environment-settings
-              key: event-bus-host
-        - name: MessageQueueSettings__UserName
-          valueFrom:
-            configMapKeyRef:
-              name: environment-settings
-              key: event-bus-user
-        - name: MessageQueueSettings__Password
-          valueFrom:
-            secretKeyRef:
-              name: environment-secrets
-              key: event-bus-password
         volumeMounts:
         - name: offers-service-data
           mountPath: /root/.aspnet/DataProtection-Keys
