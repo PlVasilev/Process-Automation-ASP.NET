@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: admin-client-data
+  name: administration-client-data
 spec:
   accessModes:
   - ReadWriteOnce
@@ -14,34 +14,34 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: admin-client
+  name: administration-client
 spec:
   type: LoadBalancer
   ports:
-  - port: 5000
+  - port: 5013
     targetPort: 80
   selector:
-    web-client: admin-client
+    web-client: administration-client
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: admin-client
+  name: administration-client
 spec:
   selector:
     matchLabels:
-      web-client: admin-client
+      web-client: administration-client
   template:
     metadata:
       labels:
-        web-client: admin-client
+        web-client: administration-client
         system: client
     spec:
       containers:
-      - name: admin-client
-        image: ivaylokenov/carrentalsystem-admin-client:latest
+      - name: administration-client
+        image: plvasilev/seller-administration-service:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -50,7 +50,7 @@ spec:
             memory: "512Mi"
             cpu: "250m"
         env:
-        - name: ApplicationSettings__Secret
+        - name: AppSettings__Secret
           valueFrom:
             secretKeyRef:
               name: environment-secrets
@@ -59,21 +59,16 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: environment-settings
-              key: admin-identity-endpoint
-        - name: ServiceEndpoints__Dealers
+              key: administration-identity-endpoint
+        - name: ServiceEndpoints__Contactus
           valueFrom:
             configMapKeyRef:
               name: environment-settings
-              key: admin-dealers-endpoint
-        - name: ServiceEndpoints__Statistics
-          valueFrom:
-            configMapKeyRef:
-              name: environment-settings
-              key: admin-statistics-endpoint
+              key: administration-contactus-endpoint
         volumeMounts:
-        - name: admin-client-data
+        - name: administration-client-data
           mountPath: /root/.aspnet/DataProtection-Keys
       volumes:
-      - name: admin-client-data
+      - name: administration-client-data
         persistentVolumeClaim:
-          claimName: admin-client-data
+          claimName: administration-client-data

@@ -60,10 +60,7 @@ services:
             - "5001:80"
         env_file: Server/Seller.Server/Seller.Shared/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerListingsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
-            - MessageQueueSettings__Host=rabbitmq
-            - MessageQueueSettings__UserName=rabbitmq
-            - MessageQueueSettings__Password=rabbitmq        
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerListingsDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true   
         restart: on-failure
         volumes:
             - data-protection:/root/.aspnet/DataProtection-Keys
@@ -82,10 +79,7 @@ services:
             - "5005:80"
         env_file: Server/Seller.Server/Seller.Shared/Common.env
         environment:
-            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerOffersDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true
-            - MessageQueueSettings__Host=rabbitmq
-            - MessageQueueSettings__UserName=rabbitmq
-            - MessageQueueSettings__Password=rabbitmq        
+            - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SellerOffersDatabase;User Id=sa; Password=yourStrongPassword12!@;MultipleActiveResultSets=true       
         restart: on-failure
         volumes:
             - data-protection:/root/.aspnet/DataProtection-Keys
@@ -124,9 +118,6 @@ services:
         env_file: Server/Seller.Server/Seller.Shared/Common.env
         environment:
             - NotificationSettings__AllowedOrigins=http://localhost
-            - MessageQueueSettings__Host=rabbitmq
-            - MessageQueueSettings__UserName=rabbitmq
-            - MessageQueueSettings__Password=rabbitmq
         restart: on-failure
         volumes:
             - data-protection:/root/.aspnet/DataProtection-Keys

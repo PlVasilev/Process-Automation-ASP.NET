@@ -55,7 +55,7 @@ spec:
         - containerPort: 80
         resources:
           limits:
-            memory: "512Mi"
+            memory: "256Mi"
             cpu: "250m"
         env:
         - name: AppSettings__Secret
@@ -63,6 +63,16 @@ spec:
             secretKeyRef:
               name: environment-secrets
               key: security-token-secret
+        - name: ServiceEndpoints__Listing
+          valueFrom:
+            configMapKeyRef:
+              name: environment-settings
+              key: geteway-listings-endpoint
+        - name: ServiceEndpoints__Offer
+          valueFrom:
+            configMapKeyRef:
+              name: environment-settings
+              key: geteway-offers-endpoint
         volumeMounts:
         - name: lisinggateway-service-data
           mountPath: /root/.aspnet/DataProtection-Keys

@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: user-client
-        image: ivaylokenov/carrentalsystem-user-client:latest
+        image: plvasilev/seller-client-service:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
