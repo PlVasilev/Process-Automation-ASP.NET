@@ -9,8 +9,10 @@ data:
   notifications-allowed-origins: http://
   administration-identity-endpoint: http://identity-service:5003
   administration-contactus-endpoint: http://contactus-service:5007
-  watchdog-identity-health: http://identity-service:5003/health
+  geteway-listings-endpoint: http://listings-service:5001
+  geteway-offers-endpoint: http://offers-service:5005
   watchdog-listings-health: http://listings-service:5001/health
+  watchdog-identity-health: http://identity-service:5003/health
   watchdog-offers-health: http://offers-service:5005/health
 
 ---
@@ -20,13 +22,13 @@ kind: Secret
 metadata:
   name: environment-secrets
 data:
-  identity-database-sa-password: eW91clN0cm9uZ1Bhc3N3b3JkMTIhQA==
-  listings-database-sa-password: eW91clN0cm9uZ1Bhc3N3b3JkMTIhQA==
-  offers-database-sa-password: eW91clN0cm9uZ1Bhc3N3b3JkMTIhQA==
-  contactus-database-sa-password: eW91clN0cm9uZ1Bhc3N3b3JkMTIhQA==
+  identity-database-sa-password: aWRlbnRpdHlQYXNzd29yZDEyIUA=
+  listings-database-sa-password: bGlzdGluZ3NQYXNzd29yZDEyIUA=
+  offers-database-sa-password: b2ZmZXJzUGFzc3dvcmQxMiFA
+  contactus-database-sa-password: Y29udGFjdHVzUGFzc3dvcmQxMiFA
   security-token-secret: QXZlbmdlcnMgQXNzZW1ibGU=
-  identity-service-connection-string: U2VydmVyPXNxbHNlcnZlcjtEYXRhYmFzZT1TZWxsZXJJZGVudGl0eURhdGFiYXNlO1VzZXIgSWQ9c2E7IFBhc3N3b3JkPXlvdXJTdHJvbmdQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
-  listings-service-connection-string: U2VydmVyPXNxbHNlcnZlcjtEYXRhYmFzZT1TZWxsZXJMaXN0aW5nc0RhdGFiYXNlO1VzZXIgSWQ9c2E7IFBhc3N3b3JkPXlvdXJTdHJvbmdQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
-  offers-service-connection-string: U2VydmVyPXNxbHNlcnZlcjtEYXRhYmFzZT1TZWxsZXJPZmZlcnNEYXRhYmFzZTtVc2VyIElkPXNhOyBQYXNzd29yZD15b3VyU3Ryb25nUGFzc3dvcmQxMiFAO011bHRpcGxlQWN0aXZlUmVzdWx0U2V0cz10cnVl
-  contactus-service-connection-string: U2VydmVyPXNxbHNlcnZlcjtEYXRhYmFzZT1TZWxsZXJNZXNzYWdlc0RhdGFiYXNlO1VzZXIgSWQ9c2E7IFBhc3N3b3JkPXlvdXJTdHJvbmdQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
+  identity-service-connection-string: U2VydmVyPWlkZW50aXR5LWRhdGFiYXNlO0RhdGFiYXNlPVNlbGxlcklkZW50aXR5RGF0YWJhc2U7VXNlciBJZD1zYTsgUGFzc3dvcmQ9aWRlbnRpdHlQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
+  listings-service-connection-string: U2VydmVyPWxpc3RpbmdzLWRhdGFiYXNlO0RhdGFiYXNlPVNlbGxlckxpc3RpbmdzRGF0YWJhc2U7VXNlciBJZD1zYTsgUGFzc3dvcmQ9bGlzdGluZ3NQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
+  offers-service-connection-string: U2VydmVyPW9mZmVycy1kYXRhYmFzZTtEYXRhYmFzZT1TZWxsZXJPZmZlcnNEYXRhYmFzZTtVc2VyIElkPXNhOyBQYXNzd29yZD1vZmZlcnNQYXNzd29yZDEyIUA7TXVsdGlwbGVBY3RpdmVSZXN1bHRTZXRzPXRydWU=
+  contactus-service-connection-string: U2VydmVyPWNvbnRhY3R1cy1kYXRhYmFzZTtEYXRhYmFzZT1TZWxsZXJNZXNzYWdlc0RhdGFiYXNlO1VzZXIgSWQ9c2E7IFBhc3N3b3JkPWNvbnRhY3R1c1Bhc3N3b3JkMTIhQDtNdWx0aXBsZUFjdGl2ZVJlc3VsdFNldHM9dHJ1ZQ==
   event-bus-password: cmFiYml0bXE=
