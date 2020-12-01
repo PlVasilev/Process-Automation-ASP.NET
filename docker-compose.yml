@@ -19,13 +19,12 @@ services:
         container_name: rabbitmq
         image: rabbitmq:3-management
         ports:
-            - "15672:15672"
             - "5672:5672"
         hostname: "rabbitmq"
         environment:
             - RABBITMQ_ERLANG_COOKIE=Rand0mR4bbitMqCo0k1e
-            - RABBITMQ_DEFAULT_USER=rabbitmq
-            - RABBITMQ_DEFAULT_PASS=rabbitmq
+            - RABBITMQ_DEFAULT_USER=rabbitmquser
+            - RABBITMQ_DEFAULT_PASS=rabbitmqPassword12!
         volumes:
             - rabbitmq:/var/lib/rabbitmq/mnesia
         networks: 
@@ -174,11 +173,11 @@ services:
         env_file: Server/Seller.Server/Seller.Shared/Common.env
         environment:
             - HealthChecks-UI__HealthChecks__0__Name=Listings
-            - HealthChecks-UI__HealthChecks__0__Uri=http://Listings/health
+            - HealthChecks-UI__HealthChecks__0__Uri=http://listings/health
             - HealthChecks-UI__HealthChecks__1__Name=Identity
-            - HealthChecks-UI__HealthChecks__1__Uri=http://Identity/health
+            - HealthChecks-UI__HealthChecks__1__Uri=http://identity/health
             - HealthChecks-UI__HealthChecks__2__Name=Offers
-            - HealthChecks-UI__HealthChecks__2__Uri=http://Offers/health
+            - HealthChecks-UI__HealthChecks__2__Uri=http://offers/health
         restart: on-failure
         volumes:
             - data-protection:/root/.aspnet/DataProtection-Keys

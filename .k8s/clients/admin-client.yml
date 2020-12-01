@@ -60,7 +60,7 @@ spec:
             configMapKeyRef:
               name: environment-settings
               key: administration-identity-endpoint
-        - name: ServiceEndpoints__Contactus
+        - name: ServiceEndpoints__Message
           valueFrom:
             configMapKeyRef:
               name: environment-settings
