@@ -38,9 +38,13 @@ namespace Seller.Notifications
                 app.UseDeveloperExceptionPage();
             }
 
+            var allowedOrigins = this.Configuration
+                .GetSection(nameof(NotificationSettings))
+                .GetValue<string>(nameof(NotificationSettings.AllowedOrigins));
+
             app.UseRouting()
                 .UseCors(x => x
-                    .WithOrigins("http://localhost")
+                    .WithOrigins(allowedOrigins)
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials())
