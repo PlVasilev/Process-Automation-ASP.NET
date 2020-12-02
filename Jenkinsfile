@@ -1,7 +1,7 @@
 pipeline {
   agent any
     parameters {
-      string(name: 'version', defaultValue: 1)
+      string(name: 'version', defaultValue: '')
     }
   stages {
     // stage('Verify Branch') {
