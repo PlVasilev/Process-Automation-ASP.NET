@@ -67,22 +67,7 @@ pipeline {
       steps {
         powershell(script: 'docker-compose down')  		
       }
-      post {
-	    success {
-	      echo "Build successfull! You should deploy! :)"
-		  mail to: 'pvvasilev2013@gmail.com',
-               // cc: 'ccedpeople@gamil.com'
-               subject: "SUCCESSFUL: Build ${env.JOB_NAME}", 
-               body: "Build Successful ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
-        }
-	    failure {
-	      echo "Build failed! You should receive an e-mail! :("
-		  mail to: 'pvvasilev2013@gmail.com',
-               // cc: 'ccedpeople@gamil.com'
-               subject: "FAILED: Build ${env.JOB_NAME}", 
-               body: "Build failed ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}.\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
-	    }
-      }
+
     }
 	stage('Push Images') {
       steps {
@@ -146,6 +131,22 @@ pipeline {
                powershell(script: 'kubectl set image deployments/user-client user-client=plvasilev/seller-user-client-development:latest')
         }
       }
+      post {
+	    success {
+	      echo "Development Build successfull! You should deploy! :)"
+		  mail to: 'pvvasilev2013@gmail.com',
+               // cc: 'ccedpeople@gamil.com'
+               subject: "SUCCESSFUL: Development Build ${env.JOB_NAME}", 
+               body: "Build Successful ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
+        }
+	    failure {
+	      echo "Development Build failed! You should fix it!"
+		  mail to: 'pvvasilev2013@gmail.com',
+               // cc: 'ccedpeople@gamil.com'
+               subject: "FAILED: Development Build ${env.JOB_NAME}", 
+               body: "Build failed ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}.\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
+	    }
+      }	  
     }
   }
 }
