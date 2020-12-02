@@ -136,7 +136,7 @@ pipeline {
       }
     }
 	stage('Deploy Development') {
-      when { branch 'main' }
+    //  when { branch 'main' }
       steps {
         withKubeConfig([credentialsId: 'DevelopmentServer', serverUrl: 'https://35.223.60.82']) {
 		       powershell(script: 'kubectl apply -f ./.k8s/.environment/development.yml') 
