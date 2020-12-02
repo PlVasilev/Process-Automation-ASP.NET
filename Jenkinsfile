@@ -28,6 +28,14 @@ pipeline {
 		powershell(script: 'docker build -t plvasilev/seller-user-client-development --build-arg configuration=development .')		
         powershell(script: 'docker images -a')
       }
+	  post {
+	    success {
+	      echo "Docker Build successfull!"
+	    }
+	    failure {
+	      powershell(script: 'docker-compose down')
+	    }
+      }
     }
     stage('Run Test Application') {
       steps {
