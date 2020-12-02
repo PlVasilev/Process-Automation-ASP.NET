@@ -116,6 +116,11 @@ pipeline {
             image.push("1.0.${env.BUILD_ID}")
             image.push('latest')			
           }
+		  docker.withRegistry('https://index.docker.io/v1/', 'DockerHub') {
+            def image = docker.image("plvasilev/seller-user-client-production")
+            image.push("1.0.${env.BUILD_ID}")
+            image.push('latest')			
+          }
         }
       }
     }
@@ -127,7 +132,7 @@ pipeline {
 		       powershell(script: 'kubectl apply -f ./.k8s/event-bus') 
 		       powershell(script: 'kubectl apply -f ./.k8s/web-services') 
 			   powershell(script: 'kubectl apply -f ./.k8s/clients') 
-               powershell(script: 'kubectl set image deployments/user-client user-client=plvasilev/seller-user-client-production:1.0.${env.BUILD_ID}')
+               powershell(script: 'kubectl set image deployments/user-client user-client=plvasilev/seller-user-client-production:"1.0.${env.BUILD_ID}"')
         }
       }
       post {
