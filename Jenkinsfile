@@ -1,13 +1,11 @@
-version = '0'
-
 pipeline {
   agent any
   stages {
-    // stage('Verify Branch') {
-    //   steps {
-    //     echo "$GIT_BRANCH"
-    //   }
-    // }
+	stage('Input') {
+      steps {
+        input('Do you want to PROCEEED and Deploy on PRODUCTION environment?')
+      }
+    }
     stage('Pull Changes') {
       steps {
         powershell(script: "git pull origin main")
