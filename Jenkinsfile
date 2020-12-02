@@ -8,7 +8,7 @@ pipeline {
     // }
     stage('Pull Changes') {
       steps {
-        powershell(script: "git pull")
+        powershell(script: "git pull origin main")
       }
     }
 	stage('Run Unit Tests') {
