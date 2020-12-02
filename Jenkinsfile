@@ -52,7 +52,7 @@ pipeline {
     }
 	stage('Run Integration Tests') {
       steps {
-        powershell(script: './Tests/ContainerTests.ps1') 
+        powershell(script: './Tests/ContainerTestsDev.ps1') 
       }
 	  post {
 	    success {
