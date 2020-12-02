@@ -193,6 +193,8 @@ services:
         build:
              context: ./Client/Seller.Client
              dockerfile: ./Dockerfile
+             args:
+                configuration: local
         ports:
             - "80:80"          
         restart: on-failure 
