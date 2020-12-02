@@ -130,13 +130,14 @@ pipeline {
     }
 	stage('Deploy Production') {
       steps {
+		echo "1.0.${env.version}"
         withKubeConfig([credentialsId: 'ProductionServer', serverUrl: 'https://34.72.91.63']) {
 		       powershell(script: 'kubectl apply -f ./.k8s/.environment/production.yml') 
 		       powershell(script: 'kubectl apply -f ./.k8s/databases') 
 		       powershell(script: 'kubectl apply -f ./.k8s/event-bus') 
 		       powershell(script: 'kubectl apply -f ./.k8s/web-services') 
 			   powershell(script: 'kubectl apply -f ./.k8s/clients') 
-               powershell(script: 'kubectl set image deployments/user-client user-client=plvasilev/seller-user-client-production:"1.0.${env.version}"')
+               powershell(script: 'kubectl set image deployments/user-client user-client=plvasilev/seller-user-client-production:"1.0.7"')
         }
       }
       post {
