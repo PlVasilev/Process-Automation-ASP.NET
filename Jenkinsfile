@@ -1,11 +1,11 @@
 pipeline {
   agent any
   stages {
-    stage('Verify Branch') {
-      steps {
-        echo "$GIT_BRANCH"
-      }
-    }
+    // stage('Verify Branch') {
+    //   steps {
+    //     echo "$GIT_BRANCH"
+    //   }
+    // }
     stage('Pull Changes') {
       steps {
         powershell(script: "git pull")
@@ -25,7 +25,7 @@ pipeline {
     stage('Docker Build') {
       steps {
         powershell(script: 'docker-compose build')
-		powershell(script: 'docker build -t plvasilev/seller-user-client-development --build-arg configuration=development .')		
+		powershell(script: 'docker build -t plvasilev/seller-user-client-development --build-arg configuration=development ./Client/Seller.Client')		
         powershell(script: 'docker images -a')
       }
 	  post {
