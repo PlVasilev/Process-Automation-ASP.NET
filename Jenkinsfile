@@ -25,7 +25,7 @@ pipeline {
     stage('Docker Build') {
       steps {
         powershell(script: 'docker-compose build')
-		powershell(script: 'docker build -t plvasilev/seller-user-client-development --build-arg configuration=development ./Client/Seller.Client')		
+		powershell(script: 'docker build -t plvasilev/seller-user-client-production --build-arg configuration=production ./Client/Seller.Client')		
         powershell(script: 'docker images -a')
       }
 	  post {
@@ -52,7 +52,7 @@ pipeline {
     }
 	stage('Run Integration Tests') {
       steps {
-        powershell(script: './Tests/ContainerTests.ps1') 
+        powershell(script: './Tests/ContainerTestsProd.ps1') 
       }
 	  post {
 	    success {
@@ -66,22 +66,6 @@ pipeline {
     stage('Stop Test Application') {
       steps {
         powershell(script: 'docker-compose down')  		
-      }
-      post {
-	    success {
-	      echo "Build successfull! You should deploy! :)"
-		  mail to: 'pvvasilev2013@gmail.com',
-               // cc: 'ccedpeople@gamil.com'
-               subject: "SUCCESSFUL: Build ${env.JOB_NAME}", 
-               body: "Build Successful ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
-        }
-	    failure {
-	      echo "Build failed! You should receive an e-mail! :("
-		  mail to: 'pvvasilev2013@gmail.com',
-               // cc: 'ccedpeople@gamil.com'
-               subject: "FAILED: Build ${env.JOB_NAME}", 
-               body: "Build failed ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}.\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
-	    }
       }
     }
 	stage('Push Images') {
@@ -135,17 +119,32 @@ pipeline {
         }
       }
     }
-	stage('Deploy Development') {
-    //  when { branch 'main' }
+	stage('Deploy Production') {
       steps {
-        withKubeConfig([credentialsId: 'DevelopmentServer', serverUrl: 'https://35.223.60.82']) {
-		       powershell(script: 'kubectl apply -f ./.k8s/.environment/development.yml') 
+        withKubeConfig([credentialsId: 'ProductionServer', serverUrl: 'https://34.72.91.63']) {
+		       powershell(script: 'kubectl apply -f ./.k8s/.environment/production.yml') 
 		       powershell(script: 'kubectl apply -f ./.k8s/databases') 
 		       powershell(script: 'kubectl apply -f ./.k8s/event-bus') 
 		       powershell(script: 'kubectl apply -f ./.k8s/web-services') 
 			   powershell(script: 'kubectl apply -f ./.k8s/clients') 
-               powershell(script: 'kubectl set image deployments/user-client user-client=plvasilev/seller-user-client-development:latest')
+               powershell(script: 'kubectl set image deployments/user-client user-client=plvasilev/seller-user-client-production:1.0.${env.BUILD_ID}')
         }
+      }
+      post {
+	    success {
+	      echo "Build Production successfull! :)"
+		  mail to: 'pvvasilev2013@gmail.com',
+               // cc: 'ccedpeople@gamil.com'
+               subject: "SUCCESSFUL:Production Build ${env.JOB_NAME}", 
+               body: "Build Successful ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
+        }
+	    failure {
+	      echo "Build Production failed! You should look into it!"
+		  mail to: 'pvvasilev2013@gmail.com',
+               // cc: 'ccedpeople@gamil.com'
+               subject: "FAILED: Production Build ${env.JOB_NAME}", 
+               body: "Build failed ${env.JOB_NAME} build no: ${env.BUILD_NUMBER}.\n\nView the log at:\n ${env.BUILD_URL}\n\nBlue Ocean:\n${env.RUN_DISPLAY_URL}"
+	    }
       }
     }
   }
