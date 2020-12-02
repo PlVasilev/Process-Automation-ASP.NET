@@ -136,7 +136,7 @@ pipeline {
 		       powershell(script: 'kubectl apply -f ./.k8s/event-bus') 
 		       powershell(script: 'kubectl apply -f ./.k8s/web-services') 
 			   powershell(script: 'kubectl apply -f ./.k8s/clients') 
-               powershell(script: 'kubectl set image deployments/user-client user-client=plvasilev/seller-user-client-production:1.0.'$env:BUILD_ID'')
+               powershell(script: 'kubectl set image deployments/user-client user-client=plvasilev/seller-user-client-production:1.0.${env:BUILD_ID}')
         }
       }
       post {
