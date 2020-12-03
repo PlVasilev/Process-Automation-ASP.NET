@@ -3,7 +3,7 @@ do {
     $count++
     Write-Output "[$env:STAGE_NAME] Starting container [Attempt: $count]"
     
-    $testStart = Invoke-WebRequest -Uri http://35.226.39.6:80 -UseBasicParsing
+    $testStart = Invoke-WebRequest -Uri http://35.225.19.185:80 -UseBasicParsing
     
     if ($testStart.statuscode -eq '200') {
         $started = $true
@@ -22,7 +22,7 @@ do {
     $count++
     Write-Output "[$env:STAGE_NAME] Starting container [Attempt: $count]"
     
-    $testStart = Invoke-WebRequest -Uri http://34.123.241.8:5003/index.html -UseBasicParsing
+    $testStart = Invoke-WebRequest -Uri http://35.223.68.190:5003/index.html -UseBasicParsing
     
     if ($testStart.statuscode -eq '200') {
         $started = $true
@@ -41,7 +41,7 @@ do {
     $count++
     Write-Output "[$env:STAGE_NAME] Starting container [Attempt: $count]"
     
-    $testStart = Invoke-WebRequest -Uri http://35.193.222.65:5009/index.html -UseBasicParsing
+    $testStart = Invoke-WebRequest -Uri http://34.122.221.8:5009/index.html -UseBasicParsing
     
     if ($testStart.statuscode -eq '200') {
         $started = $true
@@ -60,7 +60,7 @@ do {
     $count++
     Write-Output "[$env:STAGE_NAME] Starting container [Attempt: $count]"
     
-    $testStart = Invoke-WebRequest -Uri http://34.67.159.110:5007/index.html -UseBasicParsing
+    $testStart = Invoke-WebRequest -Uri http://104.197.203.62:5007/index.html -UseBasicParsing
     
     if ($testStart.statuscode -eq '200') {
         $started = $true

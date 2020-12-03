@@ -6,7 +6,7 @@ data:
   event-bus-host: event-bus
   event-bus-user: rabbitmquser
   event-bus-cookie: Rand0mR4bbitMqCo0k1e
-  notifications-allowed-origins: http://35.226.39.6
+  notifications-allowed-origins: http://35.225.19.185
   administration-identity-endpoint: http://identity-service:5003
   administration-contactus-endpoint: http://contactus-service:5007
   geteway-listings-endpoint: http://listings-service:5001
