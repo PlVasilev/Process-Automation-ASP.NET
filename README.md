@@ -6,15 +6,22 @@
 This is **extreamly** simple app for Listing Properties on the market,
 make offfers and make deal for them.
 
-## THe app is published in Google Cloud
+## The app is published in Google Cloud
+![alt text](img/ProdCloud.png)
 
 ### The APP is not fully functional it need 9 IP only got 4 at the moment from GCloud.
 ![alt text](img/PordSvcs.png)
 
+### Nods are OK
+![alt text](img/ProdNodes.png.png)
+
 ### Workloads are OK
 ![alt text](img/ProdWrokLoads.png)
 
-## The has CI and CD with Jenkins
+### Storage is OK
+![alt text](img/ProdStorage.png)
+
+## The App has CI and CD with Jenkins
 ![alt text](img/ProdJenkins.png)
 
 ## App content
