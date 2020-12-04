@@ -1,27 +1,38 @@
-# ASP.NET-Microservices-App - Seller
-##### ASP.NET Core Server + Angular Client
+# Process-Automation-ASP.NET-Microservices-App - Seller
+
+##### ASP.NET Core Server + Angular Client + Jenkins + Kubernetes + Google Coloud
 
 ### Seller APP Idea
 This is **extreamly** simple app for Listing Properties on the market,
 make offfers and make deal for them.
 
+## THe app is published in Google Cloud
 
+### The APP is not fully functional it need 9 IP only got 4 at the moment from GCloud.
+![alt text](img/PordSvcs.png)
+
+### Workloads are OK
+![alt text](img/ProdWrokLoads.png)
+
+## The has CI and CD with Jenkins
+![alt text](img/ProdJenkins.png)
 
 ## App content
-#### All Server Apps and Client App are in Docker.
-##### Start - Docker-Compose up -d
+
+#### All Server Apps and Client App are in Google Cloud.
+
 ##### Clent Url http://localhost:4201 (Clent needs about 60 sec to start)
-- Clent App Angular
+- Clent App Angular - http://35.225.19.185:80
 - Server Apps ASP.NET 3.1 - **9 Microservices**
-	1. Seller.Admin - MVC only for Admin http://localhost:5013
-	2. Seller.Identity - Api with DB - Entity Asp.Net.USer
-	3. Seller.Listings - Api with DB 
+	1. Seller.Admin - MVC only for Admin - N/A (no IP)
+	2. Seller.Identity - Api with DB - Entity Asp.Net.USer - http://35.223.68.190:5003/index.html
+	3. Seller.Listings - Api with DB - N/A (no IP)
 		1. Entities - Seller : User, Lising, Deals and Messages from Masstransit
-	4. Seller.Messages - Api with DB - Entity  Message
-	5. Seller.Offers - Api with DB - Entity Offer
-	6. Seller.Listings.Gateway - Api Gateway
-	7. Seller.Notifications - Api
-	8. Seller.watchdog - Api - AppHealth on http://localhost:5015/healthchecks-ui
+	4. Seller.Messages - Api with DB - Entity  Message - http://104.197.203.62:5007/index.html
+	5. Seller.Offers - Api with DB - Entity Offer - N/A (no IP)
+	6. Seller.Listings.Gateway - Api Gateway - http://34.122.221.8:5009/index.html
+	7. Seller.Notifications - Api - N/A (no IP)
+	8. Seller.watchdog - Api - AppHealth - N/A (no IP)
 	9. Seller.Shared - Library
 
 ## App functionality
@@ -62,7 +73,10 @@ make offfers and make deal for them.
 #### Admin can do
 1. Can login in **AdminMS** *on get* Direct call to MessageMS see all sent messages from users and archive them on *on Post* direct call.
 
-## Known Issues
+## Known Kubernetes Issues : whan runned Localy
+1. Seller.watchdog has problem conecting to RabbitMQ endpoint issue, need to be fixed.
+
+## Known DOCKER Issues
 1. **DOKER issue** outside doker works **Great** - in Microsoft.AspNetCore.Http.HttpContext(context) - context.Request.Cookies[CookieName] - can **not get** Token from Cookie - **added workaround** to keep token state
 2. Masstransit messaging **working as intended** - If Lising is updated and OffersMS is down coresponding offers for the listing are Not updateted, when OffersMS comes up again coresponding offers are automatically updated. **But** in Messages Entity - IsPublished property is **always true !?**.
 		
