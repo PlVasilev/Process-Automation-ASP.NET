@@ -22,13 +22,13 @@ make offfers and make deal for them.
 	7. Seller.Notifications - Api - **N/A (no IP)**
 	8. Seller.watchdog - Api - AppHealth - **N/A (no IP)**
 	9. Seller.Shared - Library
+	
+### You Can Access Only Client, Register on it and Send Message (Sontact Us - section in menu).
 
 ## The app is published in Google Cloud
 ![alt text](img/ProdCloud.png)
 
 ### The APP is not fully functional it need 9 IP only got 4 at the moment from GCloud.
-
-## You Can Access Only Client, Register on it and Send Message (Sontact Us - section in menu).
 ![alt text](img/PordSvcs.png)
 
 ### Nods are OK
