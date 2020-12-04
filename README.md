@@ -6,14 +6,33 @@
 This is **extreamly** simple app for Listing Properties on the market,
 make offfers and make deal for them.
 
+## App content
+
+#### All Server Apps and Client App are in Google Cloud.
+
+- Clent App Angular - http://35.225.19.185:80
+- Server Apps ASP.NET 3.1 - **9 Microservices**
+	1. Seller.Admin - MVC only for Admin - **N/A (no IP)**
+	2. Seller.Identity - Api with DB - Entity Asp.Net.USer - http://35.223.68.190:5003/index.html
+	3. Seller.Listings - Api with DB - **N/A (no IP)**
+		1. Entities - Seller : User, Lising, Deals and Messages from Masstransit
+	4. Seller.Messages - Api with DB - Entity  Message - http://104.197.203.62:5007/index.html
+	5. Seller.Offers - Api with DB - Entity Offer - **N/A (no IP)**
+	6. Seller.Listings.Gateway - Api Gateway - http://34.122.221.8:5009/index.html
+	7. Seller.Notifications - Api - **N/A (no IP)**
+	8. Seller.watchdog - Api - AppHealth - **N/A (no IP)**
+	9. Seller.Shared - Library
+
 ## The app is published in Google Cloud
 ![alt text](img/ProdCloud.png)
 
 ### The APP is not fully functional it need 9 IP only got 4 at the moment from GCloud.
+
+## You Can Access Only Client, Register on it and Send Message (Sontact Us - section in menu).
 ![alt text](img/PordSvcs.png)
 
 ### Nods are OK
-![alt text](img/ProdNodes.png.png)
+![alt text](img/ProdNodes.png)
 
 ### Workloads are OK
 ![alt text](img/ProdWrokLoads.png)
@@ -24,23 +43,7 @@ make offfers and make deal for them.
 ## The App has CI and CD with Jenkins
 ![alt text](img/ProdJenkins.png)
 
-## App content
 
-#### All Server Apps and Client App are in Google Cloud.
-
-##### Clent Url http://localhost:4201 (Clent needs about 60 sec to start)
-- Clent App Angular - http://35.225.19.185:80
-- Server Apps ASP.NET 3.1 - **9 Microservices**
-	1. Seller.Admin - MVC only for Admin - N/A (no IP)
-	2. Seller.Identity - Api with DB - Entity Asp.Net.USer - http://35.223.68.190:5003/index.html
-	3. Seller.Listings - Api with DB - N/A (no IP)
-		1. Entities - Seller : User, Lising, Deals and Messages from Masstransit
-	4. Seller.Messages - Api with DB - Entity  Message - http://104.197.203.62:5007/index.html
-	5. Seller.Offers - Api with DB - Entity Offer - N/A (no IP)
-	6. Seller.Listings.Gateway - Api Gateway - http://34.122.221.8:5009/index.html
-	7. Seller.Notifications - Api - N/A (no IP)
-	8. Seller.watchdog - Api - AppHealth - N/A (no IP)
-	9. Seller.Shared - Library
 
 ## App functionality
 
