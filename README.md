@@ -23,7 +23,7 @@ make offfers and make deal for them.
 	8. Seller.watchdog - Api - AppHealth - **N/A (no IP)**
 	9. Seller.Shared - Library
 	
-### You Can Access Only Client, Register on it and Send Message (Sontact Us - section in menu).
+### You Can Access Only Client, Register on it and Send Message (Contact Us - section in menu).
 
 ## The app is published in Google Cloud
 ![alt text](img/ProdCloud.png)
