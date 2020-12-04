@@ -83,7 +83,7 @@ make offfers and make deal for them.
 #### Admin can do
 1. Can login in **AdminMS** *on get* Direct call to MessageMS see all sent messages from users and archive them on *on Post* direct call.
 
-## Known Kubernetes Issues : whan runned Localy
+## Known Kubernetes Issues : when runned Localy
 1. Seller.watchdog has problem conecting to RabbitMQ endpoint issue, need to be fixed.
 
 ## Known DOCKER Issues
