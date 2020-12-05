@@ -1,28 +1,58 @@
-# ASP.NET-Microservices-App - Seller
-##### ASP.NET Core Server + Angular Client
+# Process-Automation-ASP.NET-Microservices-App - Seller
+
+##### ASP.NET Core Server + Angular Client + Jenkins + Kubernetes + Google Coloud
 
 ### Seller APP Idea
 This is **extreamly** simple app for Listing Properties on the market,
 make offfers and make deal for them.
 
+## The App in Development was on Google Cloud but was taken down since the was lag of IPs given by Google
 
+### Development branch on Cloud
+![alt text](img/Developmen.png)
 
-## App content
-#### All Server Apps and Client App are in Docker.
-##### Start - Docker-Compose up -d
-##### Clent Url http://localhost:4201 (Clent needs about 60 sec to start)
-- Clent App Angular
+### Development branch Services on Cloud
+![alt text](img/DevSvcs.png)
+
+### Development branch Workloads on Cloud
+![alt text](img/DevWorload.png)
+
+## App content - Production (main branch)
+
+#### All Server Apps and Client App are in Google Cloud.
+
+- Clent App Angular - http://35.225.19.185:80
 - Server Apps ASP.NET 3.1 - **9 Microservices**
-	1. Seller.Admin - MVC only for Admin http://localhost:5013
-	2. Seller.Identity - Api with DB - Entity Asp.Net.USer
-	3. Seller.Listings - Api with DB 
+	1. Seller.Admin - MVC only for Admin - **N/A (no IP)**
+	2. Seller.Identity - Api with DB - Entity Asp.Net.USer - http://35.223.68.190:5003/index.html
+	3. Seller.Listings - Api with DB - **N/A (no IP)**
 		1. Entities - Seller : User, Lising, Deals and Messages from Masstransit
-	4. Seller.Messages - Api with DB - Entity  Message
-	5. Seller.Offers - Api with DB - Entity Offer
-	6. Seller.Listings.Gateway - Api Gateway
-	7. Seller.Notifications - Api
-	8. Seller.watchdog - Api - AppHealth on http://localhost:5015/healthchecks-ui
+	4. Seller.Messages - Api with DB - Entity  Message - http://104.197.203.62:5007/index.html
+	5. Seller.Offers - Api with DB - Entity Offer - **N/A (no IP)**
+	6. Seller.Listings.Gateway - Api Gateway - http://34.122.221.8:5009/index.html
+	7. Seller.Notifications - Api - **N/A (no IP)**
+	8. Seller.watchdog - Api - AppHealth - **N/A (no IP)**
 	9. Seller.Shared - Library
+	
+### You Can Access Only Client, Register on it and Send Message (Contact Us - section in menu).
+
+## The app is published in Google Cloud
+![alt text](img/ProdCloud.png)
+
+### The APP is not fully functional it need 9 IP only got 4 at the moment from GCloud.
+![alt text](img/PordSvcs.png)
+
+### Nods are OK
+![alt text](img/ProdNodes.png)
+
+### Workloads are OK
+![alt text](img/ProdWrokLoads.png)
+
+### Storage is OK
+![alt text](img/ProdStorage.png)
+
+## The App has CI and CD with Jenkins
+![alt text](img/ProdJenkins.png)
 
 ## App functionality
 
