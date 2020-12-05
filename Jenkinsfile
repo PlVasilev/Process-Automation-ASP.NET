@@ -127,6 +127,7 @@ pipeline {
     }
 	stage('Deploy Production') {
       steps {
+		when { branch 'main' }
 		echo "1.0.${env.BUILD_ID}"
         withKubeConfig([credentialsId: 'ProductionServer', serverUrl: 'https://104.198.242.225']) {
 		       powershell(script: 'kubectl apply -f ./.k8s/.environment/production.yml') 
