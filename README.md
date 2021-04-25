@@ -1,14 +1,15 @@
 # Process-Automation-ASP.NET-Microservices-App - Seller
 
-##### ASP.NET Core Server + Angular Client + Jenkins + Kubernetes + Google Coloud
+#### ASP.NET Core Server + Angular Client + Jenkins + Kubernetes + Google Coloud
+
+### The App is NO longer in GCloud doe to end of Trial Period
 
 ### Seller APP Idea
-This is **extreamly** simple app for Listing Properties on the market,
-make offfers and make deal for them.
+This is **extreamly** simple app for Listing Properties on the market, make offers and make deal for them.
 
 ## App content
 
-#### All Server Apps and Client App are in Google Cloud.
+#### All Server and Client Apps were in Google Cloud.
 
 - Clent App Angular - http://35.225.19.185:80
 - Server Apps ASP.NET 3.1 - **9 Microservices**
@@ -23,27 +24,25 @@ make offfers and make deal for them.
 	8. Seller.watchdog - Api - AppHealth - **N/A (no IP)**
 	9. Seller.Shared - Library
 	
-### You Can Access Only Client, Register on it and Send Message (Contact Us - section in menu).
+### You were able to Access Only Client, Register on it and Send Message (Contact Us - section in menu).
 
-## The app is published in Google Cloud
+## The app was published in Google Cloud
 ![alt text](img/ProdCloud.png)
 
-### The APP is not fully functional it need 9 IP only got 4 at the moment from GCloud.
+### The APP was not fully functional it needed 9 IPs only got 4 at the time from GCloud (Trial period).
 ![alt text](img/PordSvcs.png)
 
-### Nods are OK
+### Nods were OK
 ![alt text](img/ProdNodes.png)
 
-### Workloads are OK
+### Workloads were OK
 ![alt text](img/ProdWrokLoads.png)
 
-### Storage is OK
+### Storage was OK
 ![alt text](img/ProdStorage.png)
 
 ## The App has CI and CD with Jenkins
 ![alt text](img/ProdJenkins.png)
-
-
 
 ## App functionality
 
