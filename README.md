@@ -2,7 +2,7 @@
 
 #### ASP.NET Core Server + Angular Client + Jenkins + Kubernetes + Google Coloud
 
-### The App is NO longer in GCloud doe to end of Trial Period
+### The App is NO longer in GCloud due to end of Trial Period
 
 ### Seller APP Idea
 This is **extreamly** simple app for Listing Properties on the market, make offers and make deal for them.
